@@ -1,0 +1,832 @@
+/* LOGIN */
+
+body{
+    background: #f4f6fb;
+    font-family: Helvetica, sans-serif;
+}
+
+.container-login{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-card{
+    width: 900px;
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.left-panel{
+    background: linear-gradient(135deg, #0b2a4a, #0f4fa3);
+    color: white;
+    padding: 40px;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.img-tecnico{
+    width: 100%;
+    max-width: 420px;
+    margin-top: 30px;
+}
+
+.form-control{
+    height: 45px;
+    border-radius: 8px;
+}
+
+.btn{
+    height: 45px;
+    border-radius: 8px;
+}
+
+h2{
+    font-weight: bold;
+}
+
+p{
+    font-size: 15px;
+}
+
+
+/* SELECCION USUARIO */
+
+.seleccion-card{
+    width: 800px;
+    border: none;
+    border-radius: 15px;
+}
+
+.opcion-usuario{
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: white;
+
+    border: 4px solid #0f4fa3;
+
+    margin: auto;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+    transition: 0.3s;
+}
+
+.opcion-usuario:hover{
+    transform: scale(1.05);
+}
+
+.img-opcion{
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+}
+/*dashboar_cliente*/
+body {
+      background-color: #f4f3ff;
+      font-family: Arial, sans-serif;
+    }
+
+    /* menú lateral */
+    .menu-lateral {
+      width: 220px;
+      min-height: 100vh;
+      background-color: #1a1a2e;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 20px 0;
+    }
+
+    /* logo arriba del menú */
+    .logo {
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px 20px 20px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 10px;
+    }
+
+    .logo small {
+      display: block;
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      font-weight: normal;
+      margin-top: 3px;
+    }
+
+    /* nombre del usuario en el menú */
+    .usuario-menu {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 10px;
+    }
+
+    /* círculo con las iniciales */
+    .iniciales {
+      width: 38px;
+      height: 38px;
+      background-color: #6c47ff;
+      border-radius: 50%;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .datos-usuario span {
+      display: block;
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .datos-usuario small {
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+    }
+
+    /* opciones del menú */
+    .opcion-menu {
+      display: block;
+      padding: 10px 20px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 14px;
+      border-left: 3px solid transparent;
+    }
+
+    .opcion-menu:hover {
+      color: white;
+      background-color: rgba(255,255,255,0.05);
+    }
+
+    /* opción activa (la página donde estamos) */
+    .opcion-menu.activa {
+      color: white;
+      background-color: rgba(108,71,255,0.2);
+      border-left: 3px solid #6c47ff;
+    }
+
+    /* botón cerrar sesión */
+    .btn-salir {
+      display: block;
+      margin: 20px;
+      padding: 8px;
+      background-color: rgba(255,92,106,0.15);
+      border: 1px solid rgba(255,92,106,0.3);
+      color: #ff5c6a;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    /* contenido principal (a la derecha del menú) */
+    .contenido {
+      margin-left: 220px;
+      padding: 30px;
+    }
+
+    /* título de la página */
+    .titulo-pagina {
+      margin-bottom: 25px;
+    }
+
+    .titulo-pagina h2 {
+      font-size: 24px;
+      font-weight: bold;
+      color: #1a1a2e;
+      margin-bottom: 4px;
+    }
+
+    .titulo-pagina p {
+      color: #6b6b8a;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* tarjetas de resumen */
+    .tarjeta {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #e2e0f5;
+    }
+
+    /* ícono de cada tarjeta */
+    .icono-tarjeta {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .morado  { background-color: rgba(108,71,255,0.1); }
+    .verde   { background-color: rgba(0,212,170,0.1); }
+    .naranja { background-color: rgba(255,181,71,0.1); }
+    .rojo    { background-color: rgba(255,92,106,0.1); }
+
+    /* número grande en la tarjeta */
+    .numero {
+      font-size: 32px;
+      font-weight: bold;
+      color: #1a1a2e;
+      line-height: 1;
+    }
+
+    /* texto debajo del número */
+    .descripcion {
+      font-size: 12px;
+      color: #6b6b8a;
+      margin-top: 5px;
+    }
+
+    /* texto verde de tendencia */
+    .tendencia {
+      font-size: 11px;
+      color: #00a882;
+      margin-top: 6px;
+    }
+
+
+/* DASHBOARD PROVEEDOR FINAL */
+
+
+.dashboard-proveedor {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f3ff;
+  font-family: Arial, sans-serif;
+}
+
+/* ===== MENÚ ===== */
+.dashboard-proveedor .menu-lateral {
+  width: 220px;
+  min-height: 100vh;
+  background-color: #1a1a2e;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+}
+
+.dashboard-proveedor .logo-sistema {
+  padding: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.dashboard-proveedor .logo-sistema p {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+.dashboard-proveedor .logo-sistema span {
+  display: block;
+  color: rgba(255,255,255,0.35);
+  font-size: 11px;
+}
+
+.dashboard-proveedor .datos-usuario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.dashboard-proveedor .circulo-iniciales {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #00a882;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-proveedor .info-nombre p {
+  color: white;
+  margin: 0;
+  font-size: 13px;
+  font-weight: bold;
+}
+.dashboard-proveedor .info-nombre span {
+  color: rgba(255,255,255,0.4);
+  font-size: 11px;
+}
+
+/* menú */
+.dashboard-proveedor .navegacion {
+  flex: 1;
+}
+
+.dashboard-proveedor .opcion {
+  padding: 10px 20px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 3px solid transparent;
+}
+
+.dashboard-proveedor .opcion:hover {
+  color: white;
+  background: rgba(255,255,255,0.05);
+}
+
+.dashboard-proveedor .opcion.activa {
+  color: white;
+  background: rgba(0,168,130,0.2);
+  border-left: 3px solid #00a882;
+}
+
+.dashboard-proveedor .contador {
+  margin-left: auto;
+  background: #00a882;
+  color: white;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+
+.dashboard-proveedor .zona-salida {
+  padding: 15px 20px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.dashboard-proveedor .btn-salir {
+  width: 100%;
+  background: rgba(255,92,106,0.12);
+  border: 1px solid rgba(255,92,106,0.25);
+  color: #ff5c6a;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+/* ===== CONTENIDO ===== */
+.dashboard-proveedor .contenido {
+  flex: 1;
+  padding: 25px;
+}
+
+.dashboard-proveedor .barra-superior {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-proveedor .titulo-seccion h2 {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.dashboard-proveedor .titulo-seccion p {
+  font-size: 13px;
+  color: #6b6b8a;
+}
+
+/* buscador */
+.dashboard-proveedor .buscador {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #e2e0f5;
+  border-radius: 10px;
+  padding: 6px 14px;
+  gap: 8px;
+}
+
+.dashboard-proveedor .buscador input {
+  border: none;
+  outline: none;
+  font-size: 13px;
+  background: transparent;
+}
+
+/* pestañas */
+.dashboard-proveedor .pestanas {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.dashboard-proveedor .pestana {
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 1px solid #e2e0f5;
+  background: white;
+  font-size: 13px;
+  color: #6b6b8a;
+  text-decoration: none;
+}
+
+.dashboard-proveedor .pestana.activa {
+  background: #00a882;
+  color: white;
+}
+
+/* tarjetas */
+.dashboard-proveedor .fila-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.dashboard-proveedor .tarjeta {
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid #e2e0f5;
+}
+
+/* perfil */
+.dashboard-proveedor .tarjeta-perfil {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid #e2e0f5;
+  padding: 25px;
+  max-width: 500px;
+}
+
+.dashboard-proveedor .cabecera-perfil {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.dashboard-proveedor .avatar-grande {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #00a882;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.dashboard-proveedor .fila-dato {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+
+/* ===== SECCIONES (ARREGLADO) ===== */
+.dashboard-proveedor .seccion {
+  display: none;
+}
+
+.dashboard-proveedor .seccion:target {
+  display: block;
+}
+
+.dashboard-proveedor #inicio {
+  display: block;
+}
+
+.dashboard-proveedor #perfil-sec:target ~ #inicio,
+.dashboard-proveedor #mensajes-sec:target ~ #inicio {
+  display: none;
+}
+/* ===== TARJETAS ===== */
+.dashboard-proveedor .icono-tarjeta {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.dashboard-proveedor .numero-tarjeta {
+  font-size: 26px;
+  font-weight: bold;
+  color: #1a1a2e;
+}
+
+.dashboard-proveedor .texto-tarjeta {
+  font-size: 13px;
+  color: #6b6b8a;
+}
+
+.dashboard-proveedor .tendencia {
+  font-size: 12px;
+  color: #00a882;
+  margin-top: 5px;
+}
+
+/* Colores de iconos */
+.fondo-morado { background: rgba(108, 71, 255, 0.15); }
+.fondo-verde { background: rgba(0, 168, 130, 0.15); }
+.fondo-naranja { background: rgba(255, 165, 0, 0.15); }
+.fondo-rojo { background: rgba(255, 92, 106, 0.15); }
+
+/* ===== MENSAJES ===== */
+.dashboard-proveedor .lista-mensajes {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e0f5;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.dashboard-proveedor .cabecera-mensajes {
+  padding: 15px 20px;
+  font-weight: bold;
+  border-bottom: 1px solid #e2e0f5;
+  background: #fafaff;
+}
+
+.dashboard-proveedor .mensaje-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 20px;
+  border-bottom: 1px solid #f0f0f7;
+}
+
+.dashboard-proveedor .mensaje-item:last-child {
+  border-bottom: none;
+}
+
+.dashboard-proveedor .avatar-msg {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.dashboard-proveedor .cuerpo-msg {
+  flex: 1;
+}
+
+.dashboard-proveedor .nombre-msg {
+  margin: 0;
+  font-weight: bold;
+  font-size: 13px;
+  color: #1a1a2e;
+}
+
+.dashboard-proveedor .texto-msg {
+  margin: 0;
+  font-size: 13px;
+  color: #6b6b8a;
+}
+
+.dashboard-proveedor .hora-msg {
+  font-size: 12px;
+  color: #9a9ab0;
+}
+
+/* Caja de escribir mensaje */
+.dashboard-proveedor .caja-escribir {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.dashboard-proveedor .caja-escribir input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e2e0f5;
+  outline: none;
+}
+
+.dashboard-proveedor .btn-enviar {
+  background: #00a882;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.dashboard-proveedor .btn-enviar:hover {
+  background: #009170;
+}
+
+/* Botón cambiar a cliente */
+.boton-cambiar {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1a1a2e;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.icono-cambiar {
+  display: block;
+  font-size: 18px;
+}
+
+.texto-cambiar {
+  font-size: 12px;
+}
+
+        /* ===== ESTRUCTURA GENERAL ===== */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* ===== MENÚ LATERAL ===== */
+        .menu-lateral {
+            width: 260px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background-color: #1a1a2e;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 15px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .logo small {
+            display: block;
+            font-size: 12px;
+            color: #bfc5d7;
+        }
+
+        .usuario-menu {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .iniciales {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #58a6ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .datos-usuario span {
+            display: block;
+            font-weight: 600;
+        }
+
+        .datos-usuario small {
+            color: #bfc5d7;
+        }
+
+        .opcion-menu {
+            cursor: pointer;
+            padding: 12px 15px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .opcion-menu:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .opcion-menu.activa {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ===== BOTÓN CERRAR SESIÓN ===== */
+        .btn-salir {
+            margin-top: auto;
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-salir:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ===== CONTENIDO PRINCIPAL ===== */
+        .contenido {
+            margin-left: 260px;
+            padding: 25px;
+            background-color: #f5f7fb;
+            min-height: 100vh;
+        }
+
+        .titulo-pagina h2 {
+            font-weight: bold;
+            color: #1a1a2e;
+        }
+
+        .titulo-pagina p {
+            color: #6b6b8a;
+        }
+
+        /* ===== TARJETAS DE RESUMEN ===== */
+        .tarjeta {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .icono-tarjeta {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .numero {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .descripcion {
+            color: #6b6b8a;
+        }
+
+        /* ===== SECCIONES ===== */
+        .seccion { display: none; }
+        .seccion.activa { display: block; }
+
+        /* ===== ESTILOS DEL CATÁLOGO ===== */
+        .dashboard-cliente .card {
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .dashboard-cliente .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .dashboard-cliente .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body .mt-auto {
+            margin-top: auto;
+        }
