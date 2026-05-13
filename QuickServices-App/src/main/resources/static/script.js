@@ -1,253 +1,99 @@
-// =========================
-// ELEMENTOS
-// =========================
-
-const formLogin =
-document.getElementById("formLogin");
-
-const formRegistro =
-document.getElementById("formRegistro");
-
-const btnMostrarRegistro =
-document.getElementById("btnMostrarRegistro");
-
-const btnMostrarLogin =
-document.getElementById("btnMostrarLogin");
-
-const pantallaLogin =
-document.getElementById("pantallaLogin");
-
-const pantallaSeleccion =
-document.getElementById("pantallaSeleccion");
-
-const btnCliente =
-document.getElementById("btnCliente");
-
-const btnProveedor =
-document.getElementById("btnProveedor");
-
-
-// =========================
-// PRUEBA DE SCRIPT
-// =========================
-
-// alert("SCRIPT CARGADO CORRECTAMENTE");
-
-
-// =========================
-// CAMBIAR FORMULARIOS
-// =========================
+const formLogin = document.getElementById("formLogin");
+const formRegistro = document.getElementById("formRegistro");
+const btnMostrarRegistro = document.getElementById("btnMostrarRegistro");
+const btnMostrarLogin = document.getElementById("btnMostrarLogin");
+const pantallaLogin = document.getElementById("pantallaLogin");
+const pantallaSeleccion = document.getElementById("pantallaSeleccion");
+const btnCliente = document.getElementById("btnCliente");
+const btnProveedor = document.getElementById("btnProveedor");
 
 btnMostrarRegistro.addEventListener("click", () => {
-
     formLogin.style.display = "none";
-
     formRegistro.style.display = "block";
-
 });
 
 btnMostrarLogin.addEventListener("click", () => {
-
     formRegistro.style.display = "none";
-
     formLogin.style.display = "block";
-
 });
-
-
-// =========================
-// VALIDAR CONTRASEÑA
-// =========================
 
 function validarPassword(password){
-
     return password.length >= 4;
-
 }
 
-
-// =========================
-// REGISTRO
-// =========================
-
 formRegistro.addEventListener("submit", async (e) => {
-
     e.preventDefault();
+    const nombre = document.getElementById("registroNombre").value.trim();
+    const email = document.getElementById("registroEmail").value.trim();
+    const password = document.getElementById("registroPassword").value.trim();
 
-    const nombre =
-    document.getElementById("registroNombre").value.trim();
-
-    const email =
-    document.getElementById("registroEmail").value.trim();
-
-    const password =
-    document.getElementById("registroPassword").value.trim();
-
-
-    if(nombre === "" ||
-    email === "" ||
-    password === ""){
-
+    if(nombre === "" || email === "" || password === ""){
         alert("Completa todos los campos");
         return;
-
     }
-
 
     if(!email.includes("@")){
-
         alert("Correo inválido");
         return;
-
     }
-
 
     if(!validarPassword(password)){
-
-        alert(
-        "La contraseña debe tener mayúscula, minúscula y número"
-        );
-
+        alert("La contraseña debe tener al menos 4 caracteres");
         return;
-
     }
 
-
-    const usuario = {
-
-        nombre: nombre,
-        email: email,
-        password: password
-
-    };
-
-
-    console.log(usuario);
-
+    const usuario = { nombre, email, password };
 
     try{
-
-        const response = await fetch(
-        "http://localhost:8080/registro", {
-
+        const response = await fetch("http://localhost:8080/registro", {
             method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(usuario)
-
         });
 
-
-        const data =
-        await response.text();
-
-        console.log(data);
-
+        const data = await response.text();
         alert(data);
-
         formRegistro.reset();
-
         formRegistro.style.display = "none";
-
         formLogin.style.display = "block";
-
     }catch(error){
-
-        console.log(error);
-
         alert("Error al registrar");
-
     }
-
 });
-
-
-// =========================
-// LOGIN
-// =========================
 
 formLogin.addEventListener("submit", async (e) => {
-
     e.preventDefault();
-
-    const email =
-    document.getElementById("loginEmail").value.trim();
-
-    const password =
-    document.getElementById("loginPassword").value.trim();
-
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
 
     if(email === "" || password === ""){
-
         alert("Completa todos los campos");
         return;
-
     }
-
 
     try{
-
-        const response = await fetch(
-        "http://localhost:8080/login", {
-
+        const response = await fetch("http://localhost:8080/login", {
             method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-
-                email: email,
-                password: password
-
-            })
-
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
         });
 
-
-        const data =
-        await response.text();
-
-        console.log(data);
-
-
+        const data = await response.text();
         if(data === "ok"){
-
             pantallaLogin.style.display = "none";
-
             pantallaSeleccion.style.display = "flex";
-
         }else{
-
             alert("Datos incorrectos");
-
         }
-
     }catch(error){
-
-        console.log(error);
-
         alert("Error de conexión");
-
     }
-
 });
-
-
-// =========================
-// REDIRECCIONES
-// =========================
 
 btnCliente.addEventListener("click", () => {
     window.location.href = "/dashboard";
 });
 
 btnProveedor.addEventListener("click", () => {
-
     window.location.href = "/mis-servicios";
-
 });
