@@ -20,11 +20,12 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody Usuario usuario){
+    public String login(@RequestBody Usuario usuario, jakarta.servlet.http.HttpSession session){
 
         Usuario user = repository.findByEmail(usuario.getEmail());
 
         if(user != null && user.getPassword().equals(usuario.getPassword())){
+            session.setAttribute("usuarioLogueado", user);
             return "ok";
         }
 

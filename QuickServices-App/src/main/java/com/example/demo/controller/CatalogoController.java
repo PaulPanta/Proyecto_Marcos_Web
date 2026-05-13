@@ -16,28 +16,43 @@ import java.util.Map;
 @Controller
 public class CatalogoController {
 
-    @GetMapping({"/", "/catalogo"})
+    @GetMapping("/catalogo")
     public String mostrarCatalogo(Model model) { 
         List<Servicio> servicios = cargarServicios();
         model.addAttribute("servicios", servicios);
         return "catalogo";
     }
 
+    @GetMapping("/")
+    public String index(jakarta.servlet.http.HttpSession session) {
+        session.invalidate(); 
+        return "forward:/index.html";
+    }
+
     @GetMapping("/dashboard")
-    public String mostrarDashboard(Model model) {
+    public String mostrarDashboard(Model model, jakarta.servlet.http.HttpSession session) {
         List<Servicio> servicios = cargarServicios();
+        quickservice.model.Usuario user = (quickservice.model.Usuario) session.getAttribute("usuarioLogueado");
         
-        // Datos simulados para el cliente
         Map<String, Object> cliente = new HashMap<>();
-        cliente.put("nombre", "Dayana Martínez");
-        cliente.put("iniciales", "DM");
+        if (user != null) {
+            cliente.put("nombre", user.getNombre());
+            String[] partes = user.getNombre().split(" ");
+            String iniciales = partes[0].substring(0, 1).toUpperCase();
+            if (partes.length > 1) {
+                iniciales += partes[1].substring(0, 1).toUpperCase();
+            }
+            cliente.put("iniciales", iniciales);
+        } else {
+            cliente.put("nombre", "Invitado");
+            cliente.put("iniciales", "??");
+        }
+        
         cliente.put("solicitudes", new ArrayList<>());
         
         model.addAttribute("cliente", cliente);
         model.addAttribute("servicios", servicios);
         model.addAttribute("totalServicios", servicios.size());
-        model.addAttribute("solicitudesPendientes", 0);
-        model.addAttribute("solicitudesCompletadas", 0);
         
         return "dashboard_cliente";
     }
@@ -55,4 +70,4 @@ public class CatalogoController {
         }
         return servicios;
     }
-}
+}

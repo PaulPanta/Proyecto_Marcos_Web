@@ -7,155 +7,118 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/estilos.css}">
 </head>
-
 <body>
-<!-- ===== MENÚ LATERAL ===== -->
-<div class="menu-lateral" id="menuLateral">
-
-    <div class="logo">
-        ⚡ QuickService
-        <small>Plataforma de servicios rápidos</small>
+    <div class="menu-lateral" id="menuLateral">
+        <div class="logo">
+            ⚡ QuickService
+            <small>Plataforma de servicios rápidos</small>
+        </div>
+        <div class="usuario-menu">
+            <div class="iniciales" th:text="${cliente.iniciales}">DM</div>
+            <div class="datos-usuario">
+                <span th:text="${cliente.nombre}">Usuario</span>
+                <small>👤 Cliente</small>
+            </div>
+        </div>
+        <nav class="navegacion">
+            <a th:href="@{/dashboard}" class="opcion-menu activa" style="text-decoration: none;">🏠 Inicio</a>
+            <a th:href="@{/catalogo}" class="opcion-menu" style="text-decoration: none;">🛍 Catálogo</a>
+            <div class="opcion-menu" onclick="mostrarSeccion('solicitudes', this)">📋 Mis Solicitudes</div>
+            <a th:href="@{/mis-servicios}" class="opcion-menu" style="text-decoration: none;">📋 Mis Servicios</a>
+        </nav>
+        <a href="/" class="btn-salir" style="text-decoration: none;">🚪 Cerrar sesión</a>
     </div>
-
-    <!-- Thymeleaf: datos del cliente autenticado (entidad padre) -->
-    <div class="usuario-menu">
-        <div class="iniciales" th:text="${cliente.iniciales}">DM</div>
-        <div class="datos-usuario">
-            <span th:text="${cliente.nombre}">Dayana Martínez</span>
-            <small>👤 Cliente</small>
-        </div>
-    </div>
-
-    <nav class="navegacion">
-        <a th:href="@{/dashboard}" class="opcion-menu activa" style="text-decoration: none;">🏠 Inicio</a>
-        <a th:href="@{/catalogo}" class="opcion-menu" style="text-decoration: none;">🛍 Catálogo</a>
-        <div class="opcion-menu" onclick="mostrarSeccion('solicitudes', this)">📋 Mis Solicitudes</div>
-        <a th:href="@{/mis-servicios}" class="opcion-menu" style="text-decoration: none;">📋 Mis Servicios</a>
-    </nav>
-
-    <div class="btn-salir" onclick="cerrarSesion()">🚪 Cerrar sesión</div>
-</div>
-<div class="contenido">
-    <div id="inicio" class="seccion activa">
-        <div class="titulo-pagina">
-            <h2>🏠 Mi portal</h2>
-            <p th:text="'Bienvenida, ' + ${cliente.nombre} + '. Aquí está tu resumen de hoy.'">
-                Bienvenida, Dayana. Aquí está tu resumen de hoy.
-            </p>
-        </div>
-
-        <div class="row g-3">
-            <div class="col-6 col-md-3">
-                <div class="tarjeta">
-                    <div class="icono-tarjeta morado">🛍</div>
-                    <div class="numero" th:text="${totalServicios}">12</div>
-                    <div class="descripcion">Servicios disponibles</div>
-                    <div class="tendencia">▲ +3 esta semana</div>
-                </div>
+    <div class="contenido">
+        <div id="inicio" class="seccion activa">
+            <div class="titulo-pagina">
+                <h2>🏠 Mi portal</h2>
+                <p th:text="'Bienvenida, ' + ${cliente.nombre} + '. Aquí está tu resumen de hoy.'"></p>
             </div>
-            <div class="col-6 col-md-3">
-                <div class="tarjeta">
-                    <div class="icono-tarjeta verde">📋</div>
-                    <!-- Thymeleaf: solicitudes son entidades hijas del cliente -->
-                    <div class="numero" th:text="${cliente.solicitudes.size()}">5</div>
-                    <div class="descripcion">Mis solicitudes</div>
-                    <div class="tendencia">▲ 2 activas</div>
+            <div class="row g-3">
+                <div class="col-6 col-md-3">
+                    <div class="tarjeta">
+                        <div class="icono-tarjeta morado">🛍</div>
+                        <div class="numero" th:text="${totalServicios}">0</div>
+                        <div class="descripcion">Servicios disponibles</div>
+                        <div class="tendencia">▲ +3 esta semana</div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="tarjeta">
-                    <div class="icono-tarjeta naranja">⏳</div>
-                    <div class="numero" th:text="${solicitudesPendientes}">2</div>
-                    <div class="descripcion">Pendientes</div>
-                    <div class="tendencia">Sin cambios</div>
+                <div class="col-6 col-md-3">
+                    <div class="tarjeta">
+                        <div class="icono-tarjeta verde">📋</div>
+                        <div class="numero" th:text="${cliente.solicitudes.size()}">0</div>
+                        <div class="descripcion">Mis solicitudes</div>
+                        <div class="tendencia">▲ 2 activas</div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="tarjeta">
-                    <div class="icono-tarjeta rojo">✅</div>
-                    <div class="numero" th:text="${solicitudesCompletadas}">3</div>
-                    <div class="descripcion">Completadas</div>
-                    <div class="tendencia">▲ +1 este mes</div>
+                <div class="col-6 col-md-3">
+                    <div class="tarjeta">
+                        <div class="icono-tarjeta naranja">⏳</div>
+                        <div class="numero">0</div>
+                        <div class="descripcion">Pendientes</div>
+                        <div class="tendencia">Sin cambios</div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div id="catalogo" class="seccion">
-        <div class="titulo-pagina mb-4">
-            <h2>🛍 Catálogo de Servicios</h2>
-            <p>Explora los servicios disponibles y contacta a los proveedores.</p>
-        </div>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
-
-            <!-- Bucle dinámico para servicios -->
-            <div class="col d-flex" th:each="servicio : ${servicios}">
-                <div class="card w-100">
-                    <img th:src="@{${servicio.imagenUrl}}" th:alt="${servicio.nombre}">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${servicio.nombre}">Nombre</h5>
-                        <p class="card-text text-muted small" th:text="${servicio.categoria}">Categoría</p>
-                        <p class="fw-bold" th:text="'Desde S/. ' + ${servicio.precio}">S/. 0.00</p>
-                        <span class="badge mb-2" th:text="${servicio.estado}" 
-                              th:classappend="${servicio.estado == 'Activo'} ? 'bg-success' : 'bg-secondary'">Estado</span>
-                        <p class="flex-grow-1 small" th:text="${servicio.descripcion}">Descripción</p>
-                        <button class="btn btn-primary btn-sm w-100 mt-auto" th:onclick="'contactar(' + ${servicio.id} + ')'">CONTACTAR</button>
+                <div class="col-6 col-md-3">
+                    <div class="tarjeta">
+                        <div class="icono-tarjeta rojo">✅</div>
+                        <div class="numero">0</div>
+                        <div class="descripcion">Completadas</div>
+                        <div class="tendencia">▲ +1 este mes</div>
                     </div>
                 </div>
             </div>
-
+        </div>
+        <div id="catalogo" class="seccion">
+            <div class="titulo-pagina mb-4">
+                <h2>🛍 Catálogo de Servicios</h2>
+                <p>Explora los servicios disponibles y contacta a los proveedores.</p>
+            </div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+                <div class="col d-flex" th:each="servicio : ${servicios}">
+                    <div class="card w-100">
+                        <img th:src="@{${servicio.imagenUrl}}" th:alt="${servicio.nombre}">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${servicio.nombre}">Nombre</h5>
+                            <p class="card-text text-muted small" th:text="${servicio.categoria}">Categoría</p>
+                            <p class="fw-bold" th:text="'Desde S/. ' + ${servicio.precio}">S/. 0.00</p>
+                            <span class="badge mb-2" th:text="${servicio.estado}"
+                                th:classappend="${servicio.estado == 'Activo'} ? 'bg-success' : 'bg-secondary'">Estado</span>
+                            <p class="flex-grow-1 small" th:text="${servicio.descripcion}">Descripción</p>
+                            <button class="btn btn-primary btn-sm w-100 mt-auto">CONTACTAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="solicitudes" class="seccion">
+            <div class="titulo-pagina">
+                <h2>📋 Mis Solicitudes</h2>
+                <p>Estado de tus solicitudes enviadas.</p>
+            </div>
+            <div class="table-responsive bg-white rounded border">
+                <table class="table table-sm align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Servicio</th>
+                            <th class="d-none d-sm-table-cell">Fecha</th>
+                            <th>Estado</th>
+                            <th class="d-none d-md-table-cell">Proveedor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" class="text-center py-3 text-muted">No tienes solicitudes pendientes.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="btn btn-primary mt-3" onclick="mostrarSeccion('catalogo', document.querySelectorAll('.opcion-menu')[1])">
+                + Nueva Solicitud
+            </button>
         </div>
     </div>
-    <div id="solicitudes" class="seccion">
-        <div class="titulo-pagina">
-            <h2>📋 Mis Solicitudes</h2>
-            <p>Estado de tus solicitudes enviadas.</p>
-        </div>
-
-        <div class="table-responsive bg-white rounded border">
-            <table class="table table-sm align-middle mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th>ID</th>
-                        <th>Servicio</th>
-                        <th class="d-none d-sm-table-cell">Fecha</th>
-                        <th>Estado</th>
-                        <th class="d-none d-md-table-cell">Proveedor</th>
-                    </tr>
-                </thead>
-                <!-- Thymeleaf: th:each="s : ${cliente.solicitudes}" -->
-                <tbody>
-                    <tr>
-                        <td>#001</td>
-                        <td>Plomería</td>
-                        <td class="d-none d-sm-table-cell">08/05/2026</td>
-                        <td><span class="badge bg-warning text-dark">Pendiente</span></td>
-                        <td class="d-none d-md-table-cell">Carlos Rivas</td>
-                    </tr>
-                    <tr>
-                        <td>#002</td>
-                        <td>Electricidad</td>
-                        <td class="d-none d-sm-table-cell">07/05/2026</td>
-                        <td><span class="badge bg-success">Completado</span></td>
-                        <td class="d-none d-md-table-cell">Luis Torres</td>
-                    </tr>
-                    <tr>
-                        <td>#003</td>
-                        <td>Carpintería</td>
-                        <td class="d-none d-sm-table-cell">05/05/2026</td>
-                        <td><span class="badge bg-primary">En proceso</span></td>
-                        <td class="d-none d-md-table-cell">Mario Díaz</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <button class="btn btn-primary mt-3" onclick="mostrarSeccion('catalogo', document.querySelectorAll('.opcion-menu')[1])">
-            + Nueva Solicitud
-        </button>
-    </div>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
