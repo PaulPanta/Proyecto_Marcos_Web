@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "nombre": "Carpintería",
+    "categoria": "Carpintero",
+    "precio": 20.0,
+    "estado": "Activo",
+    "descripcion": "Fabricación y reparación de muebles, puertas y estructuras de madera.",
+    "imagenUrl": "/imagenes/carpintero.jpg"
+  },
+  {
+    "id": 2,
+    "nombre": "Costurera",
+    "categoria": "Confección",
+    "precio": 20.0,
+    "estado": "Activo",
+    "descripcion": "Arreglos de ropa y confección a medida.",
+    "imagenUrl": "/imagenes/costurera.jpg"
+  },
+  {
+    "id": 3,
+    "nombre": "Reparto de Gas",
+    "categoria": "Repartidor",
+    "precio": 50.0,
+    "estado": "Activo",
+    "descripcion": "Delivery de balones de gas a domicilio, instalación incluida.",
+    "imagenUrl": "/imagenes/gas2.jpg"
+  },
+  {
+    "id": 4,
+    "nombre": "Plomero",
+    "categoria": "Plomería",
+    "precio": 30.0,
+    "estado": "Activo",
+    "descripcion": "Reparación de tuberías, desagües y llaves de agua.",
+    "imagenUrl": "/imagenes/plomero.jpg"
+  },
+  {
+    "id": 5,
+    "nombre": "Electricista",
+    "categoria": "Electricidad",
+    "precio": 30.0,
+    "estado": "Inactivo",
+    "descripcion": "Instalaciones eléctricas, mantenimiento y emergencias.",
+    "imagenUrl": "/imagenes/electricista.jpg"
+  },
+  {
+    "id": 6,
+    "nombre": "Cerrajero",
+    "categoria": "Cerrajería",
+    "precio": 30.0,
+    "estado": "Inactivo",
+    "descripcion": "Apertura de puertas, cambio de chapas y duplicado de llaves.",
+    "imagenUrl": "/imagenes/serrajero.jpg"
+  }
+]
