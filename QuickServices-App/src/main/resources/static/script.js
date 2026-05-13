@@ -31,7 +31,7 @@ document.getElementById("btnProveedor");
 // PRUEBA DE SCRIPT
 // =========================
 
-alert("SCRIPT CARGADO CORRECTAMENTE");
+// alert("SCRIPT CARGADO CORRECTAMENTE");
 
 
 // =========================
@@ -61,10 +61,7 @@ btnMostrarLogin.addEventListener("click", () => {
 
 function validarPassword(password){
 
-    return password.length >= 8 &&
-    /[A-Z]/.test(password) &&
-    /[a-z]/.test(password) &&
-    /\d/.test(password);
+    return password.length >= 4;
 
 }
 
@@ -246,15 +243,11 @@ formLogin.addEventListener("submit", async (e) => {
 // =========================
 
 btnCliente.addEventListener("click", () => {
-
-    window.location.href =
-    "dashboard_cliente.html";
-
+    window.location.href = "/dashboard";
 });
 
 btnProveedor.addEventListener("click", () => {
 
-    window.location.href =
-    "dashboard_proveedor.html";
+    window.location.href = "/mis-servicios";
 
 });
