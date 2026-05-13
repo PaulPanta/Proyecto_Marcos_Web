@@ -1,0 +1,23 @@
+# Compilación y paquetes
+**/target/
+**/*.class
+**/bin/
+
+# IDEs y Editores
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# Sistema
+Thumbs.db
+.DS_Store
+
+# Archivos temporales de Maven
+release.properties
+pom.xml.releaseBackup
+pom.xml.tagBackup
+pom.xml.next
+release.properties
