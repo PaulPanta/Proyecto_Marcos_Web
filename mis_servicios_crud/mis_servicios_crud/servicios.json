@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "nombre": "Instalaciones eléctricas",
+    "categoria": "Electricista",
+    "precio": 80.00,
+    "estado": "Activo",
+    "descripcion": "Instalación y mantenimiento de sistemas eléctricos residenciales y comerciales."
+  },
+  {
+    "id": 2,
+    "nombre": "Reparación de tuberías",
+    "categoria": "Plomero",
+    "precio": 60.00,
+    "estado": "Activo",
+    "descripcion": "Detección y reparación de fugas, instalación de tuberías y accesorios sanitarios."
+  },
+  {
+    "id": 3,
+    "nombre": "Muebles a medida",
+    "categoria": "Carpintero",
+    "precio": 150.00,
+    "estado": "Pausado",
+    "descripcion": "Fabricación de muebles personalizados en madera para hogar y oficina."
+  },
+  {
+    "id": 4,
+    "nombre": "Pintura de interiores",
+    "categoria": "Pintor",
+    "precio": 50.00,
+    "estado": "Activo",
+    "descripcion": "Pintura profesional de ambientes interiores con acabados de alta calidad."
+  }
+]

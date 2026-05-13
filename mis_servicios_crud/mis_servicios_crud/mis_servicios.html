@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis servicios</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/mis_servicios.css">
+</head>
+<body>
+
+<div class="container-fluid py-3 px-3 px-md-4">
+
+  <div class="d-flex justify-content-between align-items-start align-items-sm-center mb-3 flex-column flex-sm-row gap-2 encabezado">
+    <div>
+      <h5 class="mb-0 fw-semibold">Mis servicios</h5>
+      <small class="text-muted">Gestiona los servicios que ofreces</small>
+    </div>
+    <button class="btn btn-primary btn-sm px-3" onclick="abrirFormulario()">+ Agregar servicio</button>
+  </div>
+
+  <div class="tabla-scroll">
+    <table class="table table-bordered table-sm align-middle mb-1 w-100">
+      <thead class="table-light">
+        <tr>
+          <th style="width:40px">ID</th>
+          <th>Servicio</th>
+          <th>Descripción</th>
+          <th>Categoría</th>
+          <th>Precio desde</th>
+          <th>Estado</th>
+          <th style="width:100px">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="cuerpo">
+        <tr th:if="${#lists.isEmpty(servicios)}">
+          <td colspan="7" class="text-center text-muted py-3">No hay servicios registrados. Agrega el primero.</td>
+        </tr>
+        <tr th:each="s : ${servicios}">
+          <td th:text="${s.id}"></td>
+          <td th:text="${s.nombre}"></td>
+          <td th:text="${s.descripcion}"></td>
+          <td th:text="${s.categoria}"></td>
+          <td>S/ <span th:text="${#numbers.formatDecimal(s.precio, 1, 2)}"></span></td>
+          <td>
+            <span class="badge text-white"
+                  th:text="${s.estado}"
+                  th:classappend="${s.estado == 'Activo'} ? 'bg-success' : 'bg-warning text-dark'">
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-outline-secondary me-1 btn-accion"
+                    th:onclick="'editarServicio(' + ${s.id} + ')'">&#9998;</button>
+            <button class="btn btn-sm btn-outline-danger btn-accion"
+                    th:onclick="'pedirBorrar(' + ${s.id} + ')'">&#128465;</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mt-1 mb-3 flex-wrap gap-1">
+    <small class="text-muted" id="conteo"
+          th:text="'Mostrando 1 a ' + ${#lists.size(servicios)} + ' de ' + ${#lists.size(servicios)} + ' servicios'">
+    </small>
+    <nav>
+      <ul class="pagination pagination-sm mb-0">
+        <li class="page-item disabled"><a class="page-link">&laquo;</a></li>
+        <li class="page-item active"><a class="page-link">1</a></li>
+        <li class="page-item disabled"><a class="page-link">&raquo;</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div id="formulario" style="display:none;" class="border rounded p-3 p-md-4 bg-white">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h6 class="mb-0 fw-semibold" id="form-titulo">Agregar servicio</h6>
+      <button class="btn-close" onclick="cerrarFormulario()"></button>
+    </div>
+    <input type="hidden" id="inp-id">
+    <div class="row g-2 g-md-3">
+      <div class="col-12 col-sm-6">
+        <label class="form-label small mb-1">Nombre del servicio</label>
+        <input type="text" id="inp-nombre" class="form-control form-control-sm" placeholder="Ej. Instalaciones eléctricas">
+      </div>
+      <div class="col-12 col-sm-6">
+        <label class="form-label small mb-1">Categoría</label>
+        <select id="inp-categoria" class="form-select form-select-sm">
+          <option value="">Selecciona una categoría</option>
+          <option>Electricista</option>
+          <option>Plomero</option>
+          <option>Carpintero</option>
+          <option>Pintor</option>
+        </select>
+      </div>
+      <div class="col-12 col-sm-6">
+        <label class="form-label small mb-1">Precio desde (S/)</label>
+        <input type="number" id="inp-precio" class="form-control form-control-sm" placeholder="0.00" min="0">
+      </div>
+      <div class="col-12 col-sm-6">
+        <label class="form-label small mb-1">Estado</label>
+        <select id="inp-estado" class="form-select form-select-sm">
+          <option value="Activo">Activo</option>
+          <option value="Pausado">Pausado</option>
+        </select>
+      </div>
+      <div class="col-12">
+        <label class="form-label small mb-1">Descripción</label>
+        <textarea id="inp-desc" class="form-control form-control-sm" rows="2" placeholder="Describe tu servicio..."></textarea>
+      </div>
+    </div>
+    <div id="alerta" class="alert alert-danger py-1 mt-2 d-none small mb-0"></div>
+    <div class="d-flex justify-content-end gap-2 mt-3 flex-column flex-sm-row">
+      <button class="btn btn-sm btn-outline-secondary" onclick="cerrarFormulario()">Cancelar</button>
+      <button class="btn btn-sm btn-primary" id="btn-guardar" onclick="guardarServicio()">Guardar servicio</button>
+    </div>
+  </div>
+
+  <div id="modal-borrar" style="display:none;" class="mt-3">
+    <div class="border rounded p-3 bg-white text-center">
+      <p class="mb-2 fw-semibold">¿Eliminar este servicio?</p>
+      <small class="text-muted d-block mb-3" id="modal-nombre"></small>
+      <div class="d-flex justify-content-center gap-2">
+        <button class="btn btn-sm btn-outline-secondary" onclick="cerrarModal()">Cancelar</button>
+        <button class="btn btn-sm btn-danger" onclick="confirmarBorrar()">Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script th:inline="javascript">
+  var servicios = [];
+  var nextId = servicios.length ? Math.max.apply(null, servicios.map(function(s){ return s.id; })) + 1 : 1;
+  var borrarId = null;
+  var modoEditar = false;
+
+  function badgeEstado(estado) {
+    if (estado === 'Activo')  return '<span class="badge bg-success">Activo</span>';
+    if (estado === 'Pausado') return '<span class="badge bg-warning text-dark">Pausado</span>';
+    return '<span class="badge bg-secondary">' + estado + '</span>';
+  }
+
+  function renderTabla() {
+    var tbody = document.getElementById('cuerpo');
+
+    if (servicios.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-3">No hay servicios registrados. Agrega el primero.</td></tr>';
+      document.getElementById('conteo').textContent = '';
+      return;
+    }
+
+    var filas = '';
+    servicios.forEach(function(s) {
+      filas +=
+        '<tr>' +
+          '<td>' + s.id + '</td>' +
+          '<td>' + s.nombre + '</td>' +
+          '<td>' + (s.descripcion || '') + '</td>' +
+          '<td>' + s.categoria + '</td>' +
+          '<td>S/ ' + parseFloat(s.precio).toFixed(2) + '</td>' +
+          '<td>' + badgeEstado(s.estado) + '</td>' +
+          '<td>' +
+            '<button class="btn btn-sm btn-outline-secondary me-1 btn-accion" onclick="editarServicio(' + s.id + ')">&#9998;</button>' +
+            '<button class="btn btn-sm btn-outline-danger btn-accion" onclick="pedirBorrar(' + s.id + ')">&#128465;</button>' +
+          '</td>' +
+        '</tr>';
+    });
+
+    tbody.innerHTML = filas;
+    var n = servicios.length;
+    document.getElementById('conteo').textContent = 'Mostrando 1 a ' + n + ' de ' + n + ' servicios';
+  }
+
+  function abrirFormulario() {
+    modoEditar = false;
+    document.getElementById('form-titulo').textContent = 'Agregar servicio';
+    document.getElementById('btn-guardar').textContent = 'Guardar servicio';
+    document.getElementById('inp-id').value = '';
+    document.getElementById('inp-nombre').value = '';
+    document.getElementById('inp-categoria').value = '';
+    document.getElementById('inp-precio').value = '';
+    document.getElementById('inp-estado').value = 'Activo';
+    document.getElementById('inp-desc').value = '';
+    document.getElementById('alerta').classList.add('d-none');
+    document.getElementById('formulario').style.display = 'block';
+    document.getElementById('modal-borrar').style.display = 'none';
+  }
+
+  function cerrarFormulario() {
+    document.getElementById('formulario').style.display = 'none';
+  }
+
+  function editarServicio(id) {
+    var s = servicios.find(function(x) { return x.id === id; });
+    if (!s) return;
+    modoEditar = true;
+    document.getElementById('form-titulo').textContent = 'Editar servicio';
+    document.getElementById('btn-guardar').textContent = 'Actualizar servicio';
+    document.getElementById('inp-id').value = s.id;
+    document.getElementById('inp-nombre').value = s.nombre;
+    document.getElementById('inp-categoria').value = s.categoria;
+    document.getElementById('inp-precio').value = s.precio;
+    document.getElementById('inp-estado').value = s.estado;
+    document.getElementById('inp-desc').value = s.descripcion || '';
+    document.getElementById('alerta').classList.add('d-none');
+    document.getElementById('formulario').style.display = 'block';
+    document.getElementById('modal-borrar').style.display = 'none';
+    document.getElementById('formulario').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function guardarServicio() {
+    var nombre    = document.getElementById('inp-nombre').value.trim();
+    var categoria = document.getElementById('inp-categoria').value;
+    var precio    = document.getElementById('inp-precio').value.trim();
+    var estado    = document.getElementById('inp-estado').value;
+    var desc      = document.getElementById('inp-desc').value.trim();
+    var alerta    = document.getElementById('alerta');
+
+    if (!nombre || !categoria || !precio) {
+      alerta.textContent = 'Por favor completa nombre, categoría y precio.';
+      alerta.classList.remove('d-none');
+      return;
+    }
+    alerta.classList.add('d-none');
+
+    if (modoEditar) {
+      var id = parseInt(document.getElementById('inp-id').value);
+      var s = servicios.find(function(x) { return x.id === id; });
+      if (s) {
+        s.nombre      = nombre;
+        s.categoria   = categoria;
+        s.precio      = parseFloat(precio);
+        s.estado      = estado;
+        s.descripcion = desc;
+      }
+    } else {
+      servicios.push({ id: nextId++, nombre: nombre, categoria: categoria, precio: parseFloat(precio), estado: estado, descripcion: desc });
+    }
+
+    renderTabla();
+    cerrarFormulario();
+  }
+
+  function pedirBorrar(id) {
+    var s = servicios.find(function(x) { return x.id === id; });
+    if (!s) return;
+    borrarId = id;
+    document.getElementById('modal-nombre').textContent = s.nombre;
+    document.getElementById('modal-borrar').style.display = 'block';
+    document.getElementById('formulario').style.display = 'none';
+    document.getElementById('modal-borrar').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function cerrarModal() {
+    document.getElementById('modal-borrar').style.display = 'none';
+    borrarId = null;
+  }
+
+  function confirmarBorrar() {
+    servicios = servicios.filter(function(x) { return x.id !== borrarId; });
+    renderTabla();
+    cerrarModal();
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
