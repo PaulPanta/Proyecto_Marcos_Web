@@ -1,0 +1,59 @@
+{
+  "clientes": [
+    {
+      "id": 1,
+      "nombre": "Dayana Martínez",
+      "correo": "dayana@qs.com",
+      "iniciales": "DM",
+      "solicitudes": [
+        {
+          "id": 1,
+          "servicioId": 4,
+          "servicio": "Plomería",
+          "fecha": "2026-05-08",
+          "estado": "Pendiente",
+          "proveedor": "Carlos Rivas"
+        },
+        {
+          "id": 2,
+          "servicioId": 5,
+          "servicio": "Electricidad",
+          "fecha": "2026-05-07",
+          "estado": "Completado",
+          "proveedor": "Luis Torres"
+        }
+      ]
+    }
+  ],
+  "proveedores": [
+    {
+      "id": 1,
+      "nombre": "Carlos Rivas",
+      "correo": "proveedor@qs.com",
+      "telefono": "+51 912 345 678",
+      "ciudad": "Lima, Perú",
+      "iniciales": "CR",
+      "especialidad": "Gasfitería y Electricidad",
+      "fechaRegistro": "Febrero 2026",
+      "serviciosCompletados": 18,
+      "servicios": [
+        {
+          "id": 1,
+          "nombre": "Instalación de tuberías",
+          "categoria": "Plomero",
+          "precio": 30.00,
+          "estado": "Activo",
+          "descripcion": "Instalación y reparación de tuberías de agua."
+        },
+        {
+          "id": 2,
+          "nombre": "Instalaciones eléctricas",
+          "categoria": "Electricista",
+          "precio": 35.00,
+          "estado": "Activo",
+          "descripcion": "Instalación y mantenimiento de sistemas eléctricos."
+        }
+      ]
+    }
+  ]
+}
